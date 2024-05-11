@@ -2,6 +2,7 @@ import express from 'express';
 import conectaNaDatabase from './config/dbConect.js';
 import livro from './models/Livro.js';
 import routes from "./routes/index.js"
+import cors from "cors"
 
 const conexao = await conectaNaDatabase();
 
@@ -14,7 +15,7 @@ conexao.once("open", () => {
 })
 
 const app = express();
-
+app.use(cors())
 routes(app);
 
 app.delete('/livros/:id', (req, res) => {
